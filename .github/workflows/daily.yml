@@ -14,7 +14,8 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install -r requirements.txt
-      - run: python main.py
+      - run: python main.py > brief.txt
+      - run: echo "::notice::$(cat brief.txt)"   # GitHub 会把 notice 内容自动邮件给你
         env:
           KIMI_API_KEY: ${{ secrets.KIMI_API_KEY }}
           EMAIL_USER:   ${{ secrets.EMAIL_USER }}
