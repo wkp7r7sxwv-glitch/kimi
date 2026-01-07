@@ -37,4 +37,5 @@ def send_mail(body: str):
         s.sendmail(user, to.split(","), msg.as_string())
 
 if __name__ == "__main__":
-    send_mail(kimi_summary())
+    print(kimi_summary())
+
