@@ -18,7 +18,7 @@ def kimi_summary() -> str:
         ],
         "temperature": 0.3
     }
-    r = requests.post(url, json=payload, timeout=60)
+    r = requests.post(url, json=payload, timeout=60, headers=headers)
     r.raise_for_status()
     return r.json()["choices"][0]["message"]["content"]
 
