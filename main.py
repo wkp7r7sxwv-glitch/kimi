@@ -10,7 +10,7 @@ def kimi_summary() -> str:
         "Content-Type": "application/json"
     }
     payload = {
-        "model": "moonshot-v1",
+        "model": "moonshot-v1-8k",
         "messages": [
             {"role": "system", "content": "你是专业财经科技新闻助理，输出纯中文摘要，不带多余符号。"},
             {"role": "user", "content":
