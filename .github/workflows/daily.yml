@@ -1,23 +1,10 @@
-name: Daily Kimi Brief
-
-on:
-  schedule:
-    - cron: "5 8 * * *"   # 08:05 北京
-  workflow_dispatch:
-
-jobs:
-  send:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
-      - run: pip install -r requirements.txt
-      - run: python main.py > brief.txt
-      - run: echo "::notice::$(cat brief.txt)"   # GitHub 会把 notice 内容自动邮件给你
-        env:
-          KIMI_API_KEY: ${{ secrets.KIMI_API_KEY }}
-          EMAIL_USER:   ${{ secrets.EMAIL_USER }}
-          EMAIL_PASS:   ${{ secrets.EMAIL_PASS }}
-          EMAIL_TO:     ${{ secrets.EMAIL_TO }}
+name: Debug Kimi key
+env:
+  K: ${{ secrets.KIMI_API_KEY }}
+run: |
+  echo "key prefix=${K:0:10}"
+  curl -X POST https://api.moonshot.cn/v1/chat/completions \
+    -H "Authorization: Bearer $K" \
+    -H "Content-Type: application/json" \
+    -d '{"model":"moonshot-v1-8k","messages":[{"role":"user","content":"hi"}]}' \
+    -v
