@@ -1,4 +1,4 @@
-- name: Debug Kimi key
+name: Debug Kimi key
   env:
     K: ${{ secrets.KIMI_API_KEY }}
   run: |
