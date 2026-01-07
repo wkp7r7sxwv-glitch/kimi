@@ -1,0 +1,22 @@
+name: Daily Kimi Brief
+
+on:
+  schedule:
+    - cron: "5 0 * * *"   # 08:05 北京
+  workflow_dispatch:
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: python main.py
+        env:
+          KIMI_API_KEY: ${{ secrets.KIMI_API_KEY }}
+          EMAIL_USER:   ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS:   ${{ secrets.EMAIL_PASS }}
+          EMAIL_TO:     ${{ secrets.EMAIL_TO }}
